@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://carlos.dev/sitemap.xml",
+    sitemap: "https://portfolio-lilac-six-45.vercel.app/sitemap.xml",
   };
 }

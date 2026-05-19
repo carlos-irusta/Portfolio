@@ -16,9 +16,9 @@ const geistMono = Geist_Mono({
 });
 
 // ─── Site-wide constants ───────────────────────────────────────────────────
-const SITE_URL  = "https://carlos.dev";
+const SITE_URL = "https://portfolio-lilac-six-45.vercel.app/";
 const FULL_NAME = "Carlos Irusta";
-const TITLE     = "Carlos Irusta — Software Developer";
+const TITLE = "Carlos Irusta — Software Developer";
 const DESCRIPTION =
   "Production-ready software systems, clean architecture, and real-world problem solving. " +
   "Building reliable full-stack applications with TypeScript, Next.js, and PostgreSQL.";
