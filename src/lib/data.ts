@@ -35,7 +35,14 @@ export const projects: Project[] = [
       "Multi-tenant SaaS for inventory management and point of sale. Built for real businesses handling stock, sales, and operations at scale.",
     longDescription:
       "Full-stack multi-tenant platform with role-based access, atomic stock operations, real-time inventory tracking, and a production-hardened POS workflow.",
-    stack: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Tailwind"],
+    stack: [
+      "Node.js",
+      "Express",
+      "TypeScript",
+      "Prisma",
+      "PostgreSQL",
+      "Tailwind",
+    ],
     status: "live",
     featured: true,
     image: "/images/portada1.png",
@@ -64,11 +71,11 @@ export interface StackCategory {
 export const stack: StackCategory[] = [
   {
     label: "Languages",
-    items: ["TypeScript", "JavaScript", "SQL", "Lua"],
+    items: ["TypeScript", "JavaScript", "SQL"],
   },
   {
     label: "Frameworks",
-    items: ["Next.js", "React", "Node.js", "Prisma"],
+    items: ["Next.js", "React", "Node.js", "Express", "Prisma"],
   },
   {
     label: "Tools",
@@ -76,7 +83,7 @@ export const stack: StackCategory[] = [
   },
   {
     label: "Infrastructure",
-    items: ["PostgreSQL", "Vercel", "GitHub Actions"],
+    items: ["PostgreSQL", "Vercel"],
   },
 ];
 
