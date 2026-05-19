@@ -1,11 +1,11 @@
 "use client";
 
 import { createContext, useContext, useState } from "react";
-import { translations, type Lang, type Translations } from "./i18n";
+import { translations, type Lang } from "./i18n";
 
 interface LangContextValue {
   lang: Lang;
-  t: Translations;
+  t: (typeof translations)[Lang];
   setLang: (l: Lang) => void;
 }
 
