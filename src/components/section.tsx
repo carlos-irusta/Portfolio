@@ -27,8 +27,12 @@ export function Section({ id, children, label, className = "" }: SectionProps) {
       >
         {label && (
           <p
-            className="text-[10px] font-mono uppercase tracking-[0.16em] mb-8"
-            style={{ color: "var(--text-tertiary)" }}
+            className="text-[13px] font-mono uppercase tracking-[0.14em] mb-7 pl-3"
+            style={{
+              color: "var(--text-label)",
+              borderLeft: "2px solid var(--accent)",
+              opacity: 1,
+            }}
           >
             {label}
           </p>

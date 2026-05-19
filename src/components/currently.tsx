@@ -1,27 +1,33 @@
 "use client";
 
-import { currently } from "@/lib/data";
+import { useLang } from "@/lib/lang-context";
 import { Section } from "./section";
 
 export function Currently() {
+  const { t } = useLang();
+
   return (
-    <Section id="currently" label="Currently">
+    <Section id="currently" label={t.sections.currently}>
       <div>
-        {currently.map((item, i) => (
+        {t.currently.map((item, i) => (
           <div
             key={item.label}
-            className="flex items-baseline gap-8 py-3.5"
+            className="flex items-center gap-6 py-2.5"
             style={{
-              borderTop: i === 0 ? "none" : "1px solid var(--border)",
+              borderTop: "1px solid var(--border)",
+              ...(i === t.currently.length - 1 ? { borderBottom: "1px solid var(--border)" } : {}),
             }}
           >
             <span
-              className="text-[10px] font-mono uppercase tracking-[0.16em] w-16 shrink-0"
-              style={{ color: "var(--text-tertiary)" }}
+              className="text-[11px] font-mono uppercase tracking-[0.1em] w-20 shrink-0"
+              style={{ color: "var(--text-label)" }}
             >
               {item.label}
             </span>
-            <span className="text-sm" style={{ color: "var(--text-secondary)" }}>
+            <span
+              className="text-sm leading-snug"
+              style={{ color: "var(--text-secondary)" }}
+            >
               {item.value}
             </span>
           </div>

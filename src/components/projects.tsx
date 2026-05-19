@@ -2,20 +2,24 @@
 
 import Image from "next/image";
 import { projects, type Project } from "@/lib/data";
+import { useLang } from "@/lib/lang-context";
 import { Section } from "./section";
 
 function FeaturedPanel({ project }: { project: Project }) {
+  const { t } = useLang();
   return (
     <div
-      className="group transition-colors duration-300"
+      className="transition-colors duration-300"
       style={{ border: "1px solid var(--border)" }}
       onMouseEnter={e => ((e.currentTarget as HTMLElement).style.borderColor = "var(--border-hover)")}
       onMouseLeave={e => ((e.currentTarget as HTMLElement).style.borderColor = "var(--border)")}
     >
+      {/* Screenshot — shorter aspect ratio, less visually overwhelming */}
       {project.image && (
         <div
-          className="relative w-full aspect-[16/9] overflow-hidden"
+          className="relative w-full overflow-hidden"
           style={{
+            aspectRatio: "3/1",
             background: "var(--bg-elevated)",
             borderBottom: "1px solid var(--border)",
           }}
@@ -28,45 +32,61 @@ function FeaturedPanel({ project }: { project: Project }) {
             sizes="(max-width: 768px) 100vw, 720px"
             priority
           />
+          {/* Dark overlay — calms screenshot's native contrast to match palette */}
+          <div
+            className="absolute inset-0"
+            style={{ background: "rgba(0,0,0,0.18)", pointerEvents: "none" }}
+          />
         </div>
       )}
 
-      <div className="p-6 sm:p-8">
-        {/* Header row */}
-        <div className="flex items-baseline justify-between gap-4 mb-5">
+      <div className="p-5">
+        {/* Header row: name + status */}
+        <div className="flex items-baseline justify-between gap-4 mb-3">
           <h3
-            className="text-sm font-medium tracking-tight"
+            className="text-base font-medium tracking-[-0.01em]"
             style={{ color: "var(--text-primary)" }}
           >
             {project.name}
           </h3>
           <span
-            className="text-[10px] font-mono shrink-0"
+            className="text-[10px] font-mono shrink-0 tracking-[0.08em] uppercase"
             style={{ color: "var(--text-tertiary)" }}
           >
-            {project.status === "live" ? "live" : "dev"}
+            {project.status === "live" ? t.projects.live : t.projects.dev}
           </span>
         </div>
 
-        {/* Description */}
-        <p className="text-sm leading-[1.75] mb-5" style={{ color: "var(--text-secondary)" }}>
+        {/* Primary description */}
+        <p
+          className="text-[0.9375rem] leading-[1.7] mb-3"
+          style={{ color: "var(--text-secondary)" }}
+        >
           {project.description}
         </p>
 
+        {/* Long description — present but visually quiet */}
         {project.longDescription && (
-          <p className="text-[13px] leading-[1.75] mb-5" style={{ color: "var(--text-tertiary)" }}>
+          <p
+            className="text-[13px] leading-[1.65] mb-4"
+            style={{ color: "var(--text-tertiary)" }}
+          >
             {project.longDescription}
           </p>
         )}
 
-        {/* Footer row */}
+        {/* Footer row: stack / links */}
         <div
-          className="flex items-center justify-between gap-4 pt-5"
+          className="flex items-center justify-between gap-4 pt-4"
           style={{ borderTop: "1px solid var(--border)" }}
         >
           <div className="flex flex-wrap gap-x-4 gap-y-1">
             {project.stack.map((tech) => (
-              <span key={tech} className="text-[10px] font-mono" style={{ color: "var(--text-tertiary)" }}>
+              <span
+                key={tech}
+                className="text-[11px] font-mono"
+                style={{ color: "var(--text-tertiary)" }}
+              >
                 {tech}
               </span>
             ))}
@@ -77,7 +97,7 @@ function FeaturedPanel({ project }: { project: Project }) {
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[10px] font-mono transition-colors duration-150"
+                className="text-[11px] font-mono tracking-[0.04em] transition-colors duration-150"
                 style={{ color: "var(--text-tertiary)" }}
                 onMouseEnter={e => (e.currentTarget.style.color = "var(--text-secondary)")}
                 onMouseLeave={e => (e.currentTarget.style.color = "var(--text-tertiary)")}
@@ -90,7 +110,7 @@ function FeaturedPanel({ project }: { project: Project }) {
                 href={project.sourceUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[10px] font-mono transition-colors duration-150"
+                className="text-[11px] font-mono tracking-[0.04em] transition-colors duration-150"
                 style={{ color: "var(--text-tertiary)" }}
                 onMouseEnter={e => (e.currentTarget.style.color = "var(--text-secondary)")}
                 onMouseLeave={e => (e.currentTarget.style.color = "var(--text-tertiary)")}
@@ -106,19 +126,20 @@ function FeaturedPanel({ project }: { project: Project }) {
 }
 
 function PlaceholderPanel({ project }: { project: Project }) {
+  const { t } = useLang();
   return (
     <div
-      className="p-6 min-h-[120px] flex flex-col"
-      style={{ border: "1px solid var(--border)", opacity: 0.5 }}
+      className="p-5 flex flex-col gap-4 min-h-[96px]"
+      style={{ border: "1px solid var(--border)", opacity: 0.55 }}
     >
       <span
-        className="text-[10px] font-mono uppercase tracking-[0.16em]"
+        className="text-[10px] font-mono uppercase tracking-[0.1em]"
         style={{ color: "var(--text-tertiary)" }}
       >
-        In development
+        {t.projects.inDevelopment}
       </span>
       <span
-        className="text-xs mt-auto"
+        className="text-xs leading-relaxed mt-auto"
         style={{ color: "var(--text-tertiary)" }}
       >
         {project.description}
@@ -128,17 +149,18 @@ function PlaceholderPanel({ project }: { project: Project }) {
 }
 
 export function Projects() {
+  const { t } = useLang();
   const featured = projects.filter((p) => p.featured);
   const placeholders = projects.filter((p) => p.status === "coming-soon");
 
   return (
-    <Section id="projects" label="Work">
-      <div className="space-y-4">
+    <Section id="projects" label={t.sections.projects}>
+      <div className="space-y-3">
         {featured.map((p) => (
           <FeaturedPanel key={p.id} project={p} />
         ))}
         {placeholders.length > 0 && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
             {placeholders.map((p) => (
               <PlaceholderPanel key={p.id} project={p} />
             ))}
