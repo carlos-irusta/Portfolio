@@ -9,9 +9,9 @@ export const personal = {
     "I focus on clean architecture, production-ready systems, and solving real problems. No unnecessary complexity — just well-structured code that works.",
   location: "Based remotely",
   availability: "Available for projects",
-  email: "hello@carlos.dev",
-  github: "https://github.com/carlos",
-  linkedin: "https://linkedin.com/in/carlos",
+  email: "carlosirusta2022@gmail.com",
+  github: "https://github.com/carlos-irusta",
+  linkedin: "https://linkedin.com/in/carlosirusta",
 };
 
 export interface Project {
