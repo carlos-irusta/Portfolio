@@ -45,7 +45,7 @@ export const projects: Project[] = [
     ],
     status: "live",
     featured: true,
-    image: "/images/portada1.png",
+    image: "/images/Portada.png",
   },
   {
     id: "project-2",
